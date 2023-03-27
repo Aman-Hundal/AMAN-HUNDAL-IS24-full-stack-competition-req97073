@@ -4,7 +4,6 @@ const {
   getAllWebApps,
   addWebApp,
   updateWebApp,
-  deleteWebApp,
 } = require("../helpers/data-helpers");
 
 //GET ROUTE
@@ -27,9 +26,7 @@ router.put("/:productId", async (req, res) => {
 });
 //DELETE ROUTE
 router.delete("/:productId", async (req, res) => {
-  const { productId } = req.params;
-  const resultObj = await deleteWebApp(productId);
-  res.status(resultObj.status).json({ message: resultObj.message });
+  res.status(501).json({ message: "Request not supported" });
 });
 
 module.exports = router;

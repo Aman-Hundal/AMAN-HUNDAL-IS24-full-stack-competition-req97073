@@ -13,7 +13,7 @@ app.use(cors());
 //Routes
 app.use("/api/webapps", webappsRoute);
 app.get("/api", (req, res) => {
-  res.status(200).send("Healthy API and Component");
+  res.status(200);
 });
 
 //Start up server
