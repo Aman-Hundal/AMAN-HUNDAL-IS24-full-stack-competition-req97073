@@ -14,14 +14,15 @@ router.get("/", (req, res) => {
 });
 //POST ROUTE
 router.post("/", async (req, res) => {
-  const resultObj = await addWebApp(req.body.data);
+  const newWebApp = req.body;
+  const resultObj = await addWebApp(newWebApp);
   res.status(resultObj.status).json({ message: resultObj.message });
 });
 //PUT ROUTE
 router.put("/:productId", async (req, res) => {
-  const data = req.body.data;
+  const updatedWebApp = req.body;
   const { productId } = req.params;
-  const resultObj = await updateWebApp(productId, data);
+  const resultObj = await updateWebApp(productId, updatedWebApp);
   res.status(resultObj.status).json({ message: resultObj.message });
 });
 //DELETE ROUTE

@@ -15,7 +15,8 @@
 /frontend/.env.local
 /frontend/.env.development.local
 /frontend/.env.test.local
-/frontend/.env.production.local/notes.md
+/frontend/.env.production.local
+/notes.md
 /backend/node_modules
 /frontend/node_modules
 /.env
