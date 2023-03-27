@@ -13,7 +13,7 @@ app.use(cors());
 //Routes
 app.use("/api/webapps", webappsRoute);
 app.get("/api", (req, res) => {
-  res.send("Welcome to IMB WebApps API");
+  res.status(200).send("Healthy API and Component");
 });
 
 //Start up server
