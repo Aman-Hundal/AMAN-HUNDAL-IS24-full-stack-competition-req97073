@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 //Custom hook file to manage API calls, global app state and overall app data
 const useAppData = () => {
   //Global App State
@@ -16,6 +17,24 @@ const useAppData = () => {
       console.error(error.message);
     }
   };
+  //Function to save new web app data
+  const saveWebAppData = async (newWebAppData) => {
+    const cleanDeveloperData = newWebAppData.Developers.map(
+      (developerObj) => developerObj.name
+    );
+    newWebAppData.Developers = cleanDeveloperData;
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/webapps",
+        newWebAppData
+      );
+      if (response.status === 201) {
+        return setWebAppState((prev) => [...prev, newWebAppData]);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   //useEffect to load app data (backend api calls etc.)
   useEffect(() => {
@@ -25,6 +44,7 @@ const useAppData = () => {
   return {
     loading,
     webAppState,
+    saveWebAppData,
   };
 };
 

@@ -1,4 +1,5 @@
-const jsonData = "../data/webapps.json";
+const path = require("path");
+const jsonData = path.join(__dirname, "../data/webapps.json");
 const webApps = require("../data/webapps.json");
 const uuid = require("uuid");
 const fs = require("fs").promises;
@@ -15,7 +16,7 @@ const addWebApp = async (newWebApp) => {
     newWebApp.productId = newProductId;
     //Add new web app to webApps data
     webApps.push(newWebApp);
-    await fs.writeFile(jsonData, webApps, {
+    await fs.writeFile(jsonData, JSON.stringify(webApps), {
       encoding: "utf8",
       flag: "w",
     });
@@ -44,7 +45,7 @@ const updateWebApp = async (id, adjustedWebapp) => {
   try {
     //Update web app information via replacing the old web app data with the adjusted/revised web app data
     webApps[oldWebAppIdx] = adjustedWebapp;
-    await fs.writeFile(jsonData, webApps, {
+    await fs.writeFile(jsonData, JSON.stringify(webApps), {
       encoding: "utf8",
       flag: "w",
     });
@@ -73,7 +74,7 @@ const deleteWebApp = async (id) => {
   try {
     //Remove web app from webApps data
     webApps.splice(webAppIdx, 1);
-    await fs.writeFile(jsonData, webApps, {
+    await fs.writeFile(jsonData, JSON.stringify(webApps), {
       encoding: "utf8",
       flag: "w",
     });
