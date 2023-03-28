@@ -15,6 +15,7 @@ import DeveloperList from "./DeveloperList";
 import NoWebAppsData from "./NoWebAppsData";
 
 const WebAppsTable = (props) => {
+  //Component Props
   const { webAppData } = props;
   //Constants
   const ROWS_PER_PAGE = 15;
@@ -77,7 +78,9 @@ const WebAppsTable = (props) => {
                       <TableCell align="left">{webApp.startDate}</TableCell>
                       <TableCell align="left">{webApp.methodology}</TableCell>
                       <TableCell align="left">
-                        <Button variant="outlined" size="small">Edit</Button>
+                        <Button variant="outlined" size="small">
+                          Edit
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}

@@ -1,5 +1,7 @@
 const DeveloperList = (props) => {
+    //Component Props
   const { developerList } = props;
+
   return (
     <>
       {developerList.map((developer, idx) =>
