@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 //Main Component (Table/Tracker) for listing all Web Apps created/available
 const WebAppsTable = (props) => {
   //Component Props
-  const { webAppData } = props;
+  const { webApps } = props;
   //Constants
   const ROWS_PER_PAGE = 15;
   //Pagination State Management
@@ -28,7 +28,7 @@ const WebAppsTable = (props) => {
 
   return (
     <>
-      {webAppData?.length > 0 ? (
+      {webApps?.length > 0 ? (
         <Paper sx={{ margin: "30px" }}>
           <TableContainer>
             <Table sx={{ minWidth: 650 }}>
@@ -61,7 +61,7 @@ const WebAppsTable = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {webAppData
+                {webApps
                   .slice(
                     webAppTablePage * ROWS_PER_PAGE,
                     webAppTablePage * ROWS_PER_PAGE + ROWS_PER_PAGE
@@ -98,7 +98,7 @@ const WebAppsTable = (props) => {
               <TableFooter>
                 <TableRow>
                   <TablePagination
-                    count={webAppData.length}
+                    count={webApps.length}
                     onPageChange={(event, page) => setWebAppTablePage(page)}
                     page={webAppTablePage}
                     rowsPerPage={ROWS_PER_PAGE}

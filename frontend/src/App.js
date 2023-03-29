@@ -1,10 +1,8 @@
-import AddWebAppButton from "./components/AddWebAppButton/Index";
-import WebAppCounter from "./components/WebAppCounter/Index";
-import WebAppsTable from "./components/WebAppsTable/Index";
 import useAppData from "./hooks/useAppData";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import WebAppForm from "./components/CreateWebAppForm/Index";
 import EditWebAppForm from "./components/EditWebAppForm/Index";
+import MainPage from "./components/MainPage/Index";
 
 function App() {
   //Global App Data/Functions
@@ -21,9 +19,7 @@ function App() {
               path="/webapps"
               element={
                 <>
-                  <AddWebAppButton />
-                  <WebAppCounter webAppData={webAppState} />
-                  <WebAppsTable webAppData={webAppState} />
+                  <MainPage webAppData={webAppState} />
                 </>
               }
             />

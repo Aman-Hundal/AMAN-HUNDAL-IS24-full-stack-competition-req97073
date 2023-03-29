@@ -7,10 +7,10 @@ const NoWebAppsData = (props) => {
       display="row"
       justifyContent="center"
       alignItems="center"
-      sx={{ textAlign: "center", minHeight: "60vh" }}
+      sx={{ textAlign: "center", minHeight: "40vh" }}
     >
       <Typography fontSize="x-large">
-        There are currently no Web Applications available
+        No Web Applications found
       </Typography>
     </Stack>
   );
