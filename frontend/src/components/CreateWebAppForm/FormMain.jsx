@@ -137,7 +137,7 @@ const FormMain = (props) => {
           />
           <Stack
             direction="row"
-            sx={{ marginTop: "30px" }}
+            sx={{ marginTop: "30px", marginBottom: "20px" }}
             justifyContent="center"
             alignItems="center"
           >
