@@ -12,7 +12,6 @@ const useAppData = () => {
     try {
       const response = await axios.get("http://localhost:3000/api/webapps");
       setWebAppState((prev) => (prev = response.data));
-      setLoading(false);
     } catch (error) {
       return error;
     }
@@ -30,22 +29,35 @@ const useAppData = () => {
         "http://localhost:3000/api/webapps",
         newWebAppData
       );
-      setWebAppState((prev) => [...prev, newWebAppData]);
+      await getWebAppData();
       return response;
     } catch (error) {
       return error.response;
     }
   };
+  //Function to send a put request to updated/edit an existing web app
+  const updateWebApp = (id, adjustedWebApp) => {
+    return;
+  };
+  //Function to find specific web app from web app data/state
+  const getWebApp = (id) => {
+    return webAppState.find((webApp) => webApp.productId === id);
+  };
 
   //useEffect to load app data (backend api calls etc.)
   useEffect(() => {
-    getWebAppData();
+    const getAllData = async () => {
+      await getWebAppData();
+      setLoading(false);
+    };
+    getAllData();
   }, []);
 
   return {
     loading,
     webAppState,
     saveWebAppData,
+    getWebApp,
   };
 };
 

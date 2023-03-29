@@ -13,7 +13,7 @@ const AddDevelopers = (props) => {
             <Grid key={idx} item md={3} s={8} xs={12}>
               <input
                 placeholder="Developer Name"
-                style={{ height: "30px", marginBottom: "5px" }}
+                style={{ height: "30px", marginBottom: "10px" }}
                 variant="outlined"
                 type="text"
                 {...register(`Developers.${idx}.name`, {

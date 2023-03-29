@@ -1,5 +1,5 @@
 const DeveloperList = (props) => {
-    //Component Props
+  //Component Props
   const { developerList } = props;
 
   return (

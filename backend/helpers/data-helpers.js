@@ -8,12 +8,16 @@ const fs = require("fs").promises;
 const getAllWebApps = () => {
   return webApps;
 };
+//Function to gather one specific web app index
+const getWebApp = (id) => {
+  return webApps.findIndex((webApp) => webApp.id === id);
+};
 //Function to add a new web app to JSON data
 const addWebApp = async (newWebApp) => {
   try {
     //Create new product id (uuid) for web app
     const newProductId = uuid.v4();
-    newWebApp.productId = newProductId;
+    newWebApp["productId"] = newProductId;
     //Add new web app to webApps JSON data
     webApps.push(newWebApp);
     await fs.writeFile(jsonData, JSON.stringify(webApps), {
@@ -34,7 +38,7 @@ const addWebApp = async (newWebApp) => {
 //Function to update an existing web app
 const updateWebApp = async (id, adjustedWebapp) => {
   //Find position of web app that is going to be updated
-  const oldWebAppIdx = webApps.findIndex((webApp) => webApp.id === id);
+  const oldWebAppIdx = getWebApp(id);
   //Error handling for web app that does not exist
   if (oldWebAppIdx === -1) {
     return {
@@ -94,4 +98,5 @@ module.exports = {
   addWebApp,
   updateWebApp,
   deleteWebApp,
+  getWebApp,
 };

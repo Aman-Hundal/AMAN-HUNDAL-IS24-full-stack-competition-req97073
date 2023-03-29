@@ -1,34 +1,50 @@
 import "../styles/webappform.css";
 import { Grid, Button, TextField, MenuItem, Stack } from "@mui/material";
-import { useForm, useFieldArray } from "react-hook-form";
-import AddDevelopers from "./AddDevelopers";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import EditDevelopers from "./EditDevelopers";
 
 const FormMain = (props) => {
   //Component Props
-  const { saveWebAppData, setSubmissionError } = props;
+  const { saveWebAppData, setSubmissionError, webApp } = props;
   //useForm hook to manage form data
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm();
-  const { fields, append, remove } = useFieldArray({
-    name: "Developers",
-    control,
-    rules: {
-      required:
-        "Please add 1 to 5 developers and ensure that a name is entered in there respective fields.",
-      minLength: 1,
-      maxLength: 5,
-    },
+  //State to manage developer form data
+  const [developerFormData, setDeveloperFormData] = useState({
+    Developers: webApp.Developers,
+    error: false,
+    message: "",
   });
   //React Router hook
   const navigate = useNavigate();
 
+  //Function to handle form input change for developer for data
+  const handleDeveloperChange = (value, idx) => {
+    const Developers = [...developerFormData.Developers];
+    Developers[idx] = value;
+    setDeveloperFormData((prev) => ({ ...prev, Developers }));
+  };
+  //Function to handle form input change for developer for data
+  const handleErrorsDeveloperData = () => {
+    if (developerFormData.Developers.every((developer) => developer === "")) {
+      const message =
+        "Please add 1 to 5 developers and ensure that a name is entered in there respective fields.";
+      const error = true;
+      return setDeveloperFormData((prev) => ({ ...prev, message, error }));
+    }
+    const message = "";
+    const error = false;
+    setDeveloperFormData((prev) => ({ ...prev, message, error }));
+  };
+
+  console.log(Object.keys(errors).length);
   //Function to submit and save new web app data
-  const submitNewWebAppData = async (data) => {
+  const submitUpdatedAppData = async (data) => {
     const response = await saveWebAppData(data);
     if (response.status !== 201) {
       return setSubmissionError((prev) => ({
@@ -46,13 +62,19 @@ const FormMain = (props) => {
     navigate("/webapps");
   };
 
+  //useEffect to handle errors
+  useEffect(() => {
+    handleErrorsDeveloperData();
+  }, [developerFormData.Developers]);
+
   return (
     <>
-      <form onSubmit={handleSubmit(submitNewWebAppData)} autoComplete="off">
+      <form onSubmit={handleSubmit(submitUpdatedAppData)} autoComplete="off">
         <Grid container>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
             <TextField
               label="Product Name"
+              defaultValue={webApp.productName}
               fullWidth
               variant="outlined"
               type="text"
@@ -66,6 +88,7 @@ const FormMain = (props) => {
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
             <TextField
               label="Product Owner Name"
+              defaultValue={webApp.productOwnerName}
               fullWidth
               variant="outlined"
               type="text"
@@ -79,6 +102,7 @@ const FormMain = (props) => {
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
             <TextField
               label="Scrum Master Name"
+              defaultValue={webApp.scrumMasterName}
               fullWidth
               variant="outlined"
               type="text"
@@ -92,6 +116,7 @@ const FormMain = (props) => {
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
             <TextField
               label="Start Date"
+              defaultValue={webApp.startDate}
               fullWidth
               variant="outlined"
               type="date"
@@ -110,8 +135,11 @@ const FormMain = (props) => {
               variant="outlined"
               fullWidth
               select
-              defaultValue=""
+              defaultValue={webApp.methodology}
               label="Methodology"
+              InputLabelProps={{
+                shrink: true,
+              }}
               name="methodology"
               {...register("methodology", { required: true })}
             >
@@ -128,12 +156,12 @@ const FormMain = (props) => {
           </Grid>
         </Grid>
         <Stack direction="column" justifyContent="center" alignItems="center">
-          <AddDevelopers
-            append={append}
-            remove={remove}
-            errors={errors}
-            register={register}
-            fields={fields}
+          <EditDevelopers
+            errors={developerFormData.error}
+            errorMessage={developerFormData.message}
+            developerList={developerFormData.Developers}
+            handleDeveloperChange={handleDeveloperChange}
+            handleErrorsDeveloperData={handleErrorsDeveloperData}
           />
           <Stack
             direction="row"
@@ -144,8 +172,10 @@ const FormMain = (props) => {
             <Button
               size="medium"
               type="submit"
+              disabled={
+                Object.keys(errors).length !== 0 || developerFormData.error
+              }
               variant="outlined"
-              disabled={Object.keys(errors).length !== 0}
               sx={{ minWidth: 150, marginRight: "5px" }}
             >
               Save

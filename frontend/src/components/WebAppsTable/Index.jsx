@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import DeveloperList from "./DeveloperList";
 import NoWebAppsData from "./NoWebAppsData";
+import { useNavigate } from "react-router-dom";
 
 const WebAppsTable = (props) => {
   //Component Props
@@ -21,6 +22,8 @@ const WebAppsTable = (props) => {
   const ROWS_PER_PAGE = 15;
   //Pagination State Management
   const [webAppTablePage, setWebAppTablePage] = useState(0);
+  //React Router hook
+  const navigate = useNavigate();
 
   return (
     <>
@@ -78,7 +81,13 @@ const WebAppsTable = (props) => {
                       <TableCell align="left">{webApp.startDate}</TableCell>
                       <TableCell align="left">{webApp.methodology}</TableCell>
                       <TableCell align="left">
-                        <Button variant="outlined" size="small">
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          onClick={() =>
+                            navigate(`/webapps/${webApp.productId}/edit`)
+                          }
+                        >
                           Edit
                         </Button>
                       </TableCell>
