@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const FormMain = (props) => {
   //Component Props
-  const { saveWebAppData, setSubmissionError } = props;
+  const { saveWebApp, setSubmissionError } = props;
   //useForm hook to manage form data
   const {
     register,
@@ -29,7 +29,7 @@ const FormMain = (props) => {
 
   //Function to submit and save new web app data
   const submitNewWebAppData = async (data) => {
-    const response = await saveWebAppData(data);
+    const response = await saveWebApp(data);
     if (response.status !== 201) {
       return setSubmissionError((prev) => ({
         ...prev,

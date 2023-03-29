@@ -7,7 +7,7 @@ import EditDevelopers from "./EditDevelopers";
 
 const FormMain = (props) => {
   //Component Props
-  const { saveWebAppData, setSubmissionError, webApp } = props;
+  const { updateWebApp, setSubmissionError, webApp } = props;
   //useForm hook to manage form data
   const {
     register,
@@ -41,12 +41,13 @@ const FormMain = (props) => {
     const error = false;
     setDeveloperFormData((prev) => ({ ...prev, message, error }));
   };
-
-  console.log(Object.keys(errors).length);
   //Function to submit and save new web app data
   const submitUpdatedAppData = async (data) => {
-    const response = await saveWebAppData(data);
-    if (response.status !== 201) {
+    data["Developers"] = developerFormData.Developers.filter(
+      (developer) => developer !== ""
+    );
+    const response = await updateWebApp(webApp.productId, data);
+    if (response.status !== 204) {
       return setSubmissionError((prev) => ({
         ...prev,
         error: true,

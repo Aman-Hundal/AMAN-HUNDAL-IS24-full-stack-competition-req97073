@@ -8,7 +8,8 @@ import EditWebAppForm from "./components/EditWebApp/Index";
 
 function App() {
   //Global App Data/Functions
-  const { webAppState, loading, saveWebAppData, getWebApp } = useAppData();
+  const { webAppState, loading, saveWebApp, getWebApp, updateWebApp } =
+    useAppData();
 
   return (
     <>
@@ -28,11 +29,16 @@ function App() {
             />
             <Route
               path="/webapps/new"
-              element={<WebAppForm saveWebAppData={saveWebAppData} />}
+              element={<WebAppForm saveWebApp={saveWebApp} />}
             />
             <Route
               path="/webapps/:productId/edit"
-              element={<EditWebAppForm getWebApp={getWebApp} />}
+              element={
+                <EditWebAppForm
+                  getWebApp={getWebApp}
+                  updateWebApp={updateWebApp}
+                />
+              }
             />
             <Route path="/" element={<Navigate to="/webapps" replace />} />
             {/* <Route path="*" element={<Navigate to="/notfound" replace />} /> */}

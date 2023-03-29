@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const CreateWebAppForm = (props) => {
   //Component Props
-  const { saveWebAppData } = props;
+  const { saveWebApp } = props;
   //Local state to manage submission error handling
   const [submissionError, setSubmissionError] = useState({
     error: false,
@@ -20,7 +20,7 @@ const CreateWebAppForm = (props) => {
       )}
       <h2>Create a New Web Application</h2>
       <FormMain
-        saveWebAppData={saveWebAppData}
+        saveWebApp={saveWebApp}
         setSubmissionError={setSubmissionError}
       />
     </Stack>

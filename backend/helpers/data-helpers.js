@@ -10,7 +10,7 @@ const getAllWebApps = () => {
 };
 //Function to gather one specific web app index
 const getWebApp = (id) => {
-  return webApps.findIndex((webApp) => webApp.id === id);
+  return webApps.findIndex((webApp) => webApp.productId === id);
 };
 //Function to add a new web app to JSON data
 const addWebApp = async (newWebApp) => {
@@ -67,7 +67,7 @@ const updateWebApp = async (id, adjustedWebapp) => {
 //Function to delete an existing web app
 const deleteWebApp = async (id) => {
   //Find position of web app that is going to be deleted
-  const webAppIdx = webApps.findIndex((webApp) => webApp.id === id);
+  const webAppIdx = webApps.findIndex((webApp) => webApp.productId === id);
   //Error handling for web app that does not exist
   if (webAppIdx === -1) {
     return {

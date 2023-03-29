@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const EditWebAppForm = (props) => {
   //Component Props
-  const { getWebApp, saveWebAppData } = props;
+  const { getWebApp, updateWebApp } = props;
   //Local state to manage submission error handling
   const [submissionError, setSubmissionError] = useState({
     error: false,
@@ -25,7 +25,7 @@ const EditWebAppForm = (props) => {
       )}
       <h2>Edit Web Application</h2>
       <FormMain
-        saveWebAppData={saveWebAppData}
+        updateWebApp={updateWebApp}
         setSubmissionError={setSubmissionError}
         webApp={webApp}
       />

@@ -8,7 +8,7 @@ const useAppData = () => {
   const [loading, setLoading] = useState(true);
 
   //Function to gather backend api web app data and configure state for web app data
-  const getWebAppData = async () => {
+  const getAllWebApps = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/webapps");
       setWebAppState((prev) => (prev = response.data));
@@ -17,7 +17,7 @@ const useAppData = () => {
     }
   };
   //Function to save new web app data to backend api and to adjust state with new web app data
-  const saveWebAppData = async (newWebAppData) => {
+  const saveWebApp = async (newWebAppData) => {
     //Clean developers array data provided by form
     const cleanDeveloperData = newWebAppData.Developers.map(
       (developerObj) => developerObj.name
@@ -29,15 +29,25 @@ const useAppData = () => {
         "http://localhost:3000/api/webapps",
         newWebAppData
       );
-      await getWebAppData();
+      await getAllWebApps();
       return response;
     } catch (error) {
       return error.response;
     }
   };
   //Function to send a put request to updated/edit an existing web app
-  const updateWebApp = (id, adjustedWebApp) => {
-    return;
+  const updateWebApp = async (id, adjustedWebApp) => {
+    adjustedWebApp["productId"] = id;
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/webapps/${id}`,
+        adjustedWebApp
+      );
+      await getAllWebApps();
+      return response;
+    } catch (error) {
+      return error.response;
+    }
   };
   //Function to find specific web app from web app data/state
   const getWebApp = (id) => {
@@ -47,7 +57,7 @@ const useAppData = () => {
   //useEffect to load app data (backend api calls etc.)
   useEffect(() => {
     const getAllData = async () => {
-      await getWebAppData();
+      await getAllWebApps();
       setLoading(false);
     };
     getAllData();
@@ -56,8 +66,9 @@ const useAppData = () => {
   return {
     loading,
     webAppState,
-    saveWebAppData,
+    saveWebApp,
     getWebApp,
+    updateWebApp,
   };
 };
 
