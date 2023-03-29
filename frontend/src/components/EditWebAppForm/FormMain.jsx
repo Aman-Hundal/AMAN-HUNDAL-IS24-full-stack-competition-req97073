@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import EditDevelopers from "./EditDevelopers";
 
+//Main Form Component for editing Web App data
 const FormMain = (props) => {
   //Component Props
   const { updateWebApp, setSubmissionError, webApp } = props;
@@ -16,24 +17,25 @@ const FormMain = (props) => {
   } = useForm();
   //State to manage developer form data
   const [developerFormData, setDeveloperFormData] = useState({
-    Developers: webApp.Developers,
+    developers: webApp.Developers,
     error: false,
     message: "",
   });
   //React Router hook
   const navigate = useNavigate();
 
-  //Function to handle form input change for developer for data
+  //Function to handle form input change for developer data
   const handleDeveloperChange = (value, idx) => {
-    const Developers = [...developerFormData.Developers];
-    Developers[idx] = value;
-    setDeveloperFormData((prev) => ({ ...prev, Developers }));
+    const developers = [...developerFormData.developers];
+    developers[idx] = value;
+    setDeveloperFormData((prev) => ({ ...prev, developers }));
   };
-  //Function to handle form input change for developer for data
+  //Function to handle errors on form input for developer data
   const handleErrorsDeveloperData = () => {
-    if (developerFormData.Developers.every((developer) => developer === "")) {
+    //Conditional to check and see if all elements in the developer data form array are blank (""), if so there is an error
+    if (developerFormData.developers.every((developer) => developer === "")) {
       const message =
-        "Please add 1 to 5 developers and ensure that a name is entered in there respective fields.";
+        "To submit the form, please add 1 to 5 developers and ensure that a name is entered in there respective fields.";
       const error = true;
       return setDeveloperFormData((prev) => ({ ...prev, message, error }));
     }
@@ -41,12 +43,13 @@ const FormMain = (props) => {
     const error = false;
     setDeveloperFormData((prev) => ({ ...prev, message, error }));
   };
-  //Function to submit and save new web app data
+  //Function to submit and save updated web app data
   const submitUpdatedAppData = async (data) => {
-    data["Developers"] = developerFormData.Developers.filter(
-      (developer) => developer !== ""
-    );
+    //Add developers form data to data that will be sent to backend api
+    data["Developers"] = developerFormData.developers;
+    //Save updated web app data
     const response = await updateWebApp(webApp.productId, data);
+    //Conditional statement to check if there was an error submitting the updated web app data
     if (response.status !== 204) {
       return setSubmissionError((prev) => ({
         ...prev,
@@ -54,7 +57,7 @@ const FormMain = (props) => {
         message: response.data.message,
       }));
     }
-    //Clear error data (if any), and naviate to main page
+    //Clear error data and navigate to main page
     setSubmissionError((prev) => ({
       ...prev,
       error: false,
@@ -63,10 +66,10 @@ const FormMain = (props) => {
     navigate("/webapps");
   };
 
-  //useEffect to handle errors
+  //useEffect call to handle errors on changes to developer form data
   useEffect(() => {
     handleErrorsDeveloperData();
-  }, [developerFormData.Developers]);
+  }, [developerFormData.developers]);
 
   return (
     <>
@@ -83,7 +86,7 @@ const FormMain = (props) => {
               {...register("productName", { required: true })}
             />
             {errors.productName && (
-              <p className="form-error">Product Name is required.</p>
+              <p className="form-error">To submit the form, Product Name is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -97,7 +100,7 @@ const FormMain = (props) => {
               {...register("productOwnerName", { required: true })}
             />
             {errors.productOwnerName && (
-              <p className="form-error">Product Owner Name is required.</p>
+              <p className="form-error">To submit the form, Product Owner Name is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -111,7 +114,7 @@ const FormMain = (props) => {
               {...register("scrumMasterName", { required: true })}
             />
             {errors.scrumMasterName && (
-              <p className="form-error">Scrum Master Name is required.</p>
+              <p className="form-error">To submit the form, Scrum Master Name is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -128,7 +131,7 @@ const FormMain = (props) => {
               {...register("startDate", { required: true })}
             />
             {errors.startDate && (
-              <p className="form-error">Start Date is required.</p>
+              <p className="form-error">To submit the form, Start Date is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -152,7 +155,7 @@ const FormMain = (props) => {
               </MenuItem>
             </TextField>
             {errors.methodology && (
-              <p className="form-error">Methodology is required.</p>
+              <p className="form-error">To submit the form, Methodology is required.</p>
             )}
           </Grid>
         </Grid>
@@ -160,7 +163,7 @@ const FormMain = (props) => {
           <EditDevelopers
             errors={developerFormData.error}
             errorMessage={developerFormData.message}
-            developerList={developerFormData.Developers}
+            developerList={developerFormData.developers}
             handleDeveloperChange={handleDeveloperChange}
             handleErrorsDeveloperData={handleErrorsDeveloperData}
           />

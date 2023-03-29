@@ -18,11 +18,11 @@ const useAppData = () => {
   };
   //Function to save new web app data to backend api and to adjust state with new web app data
   const saveWebApp = async (newWebAppData) => {
-    //Clean developers array data provided by form
+    //Clean developers array data provided by form by gathering the names of all developers
     const cleanDeveloperData = newWebAppData.Developers.map(
       (developerObj) => developerObj.name
     );
-    newWebAppData.Developers = cleanDeveloperData;
+    newWebAppData["Developers"] = cleanDeveloperData;
 
     try {
       const response = await axios.post(
@@ -35,9 +35,14 @@ const useAppData = () => {
       return error.response;
     }
   };
-  //Function to send a put request to updated/edit an existing web app
+  //Function to send a put request to update/edit an existing web app and to adjust state with new web app data
   const updateWebApp = async (id, adjustedWebApp) => {
+    //Clean developers array data provided by form by removing all instances of undefined or blank strings "" (blank developer names)
+    adjustedWebApp["Developers"] = adjustedWebApp.Developers.filter(
+      (developer) => developer !== "" && developer !== undefined
+    );
     adjustedWebApp["productId"] = id;
+
     try {
       const response = await axios.put(
         `http://localhost:3000/api/webapps/${id}`,

@@ -1,6 +1,7 @@
 import { Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+//Component (Button) that allows the user to add a Web App
 const AddWebAppButton = (props) => {
   //React Router hook
   const navigate = useNavigate();

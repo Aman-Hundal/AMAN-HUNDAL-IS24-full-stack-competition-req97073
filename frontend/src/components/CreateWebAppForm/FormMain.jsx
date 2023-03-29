@@ -4,22 +4,24 @@ import { useForm, useFieldArray } from "react-hook-form";
 import AddDevelopers from "./AddDevelopers";
 import { useNavigate } from "react-router-dom";
 
+//Main Form Component for creating Web Apps
 const FormMain = (props) => {
   //Component Props
   const { saveWebApp, setSubmissionError } = props;
-  //useForm hook to manage form data
+  //useForm hook to manage form data (productName, scrumMaster, start date etc)
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+  //useForm hook to manage adding developers
   const { fields, append, remove } = useFieldArray({
     name: "Developers",
     control,
     rules: {
       required:
-        "Please add 1 to 5 developers and ensure that a name is entered in there respective fields.",
+        "To submit the form, please add 1 to 5 developers and ensure that a name is entered in there respective fields.",
       minLength: 1,
       maxLength: 5,
     },
@@ -29,7 +31,9 @@ const FormMain = (props) => {
 
   //Function to submit and save new web app data
   const submitNewWebAppData = async (data) => {
+    //Save new web app data
     const response = await saveWebApp(data);
+    //Conditional statement to check if there was an error submitting the web app data
     if (response.status !== 201) {
       return setSubmissionError((prev) => ({
         ...prev,
@@ -37,7 +41,7 @@ const FormMain = (props) => {
         message: response.data.message,
       }));
     }
-    //Clear error data (if any), and naviate to main page
+    //Clear submission error data and naviate to main page
     setSubmissionError((prev) => ({
       ...prev,
       error: false,
@@ -60,7 +64,7 @@ const FormMain = (props) => {
               {...register("productName", { required: true })}
             />
             {errors.productName && (
-              <p className="form-error">Product Name is required.</p>
+              <p className="form-error">To submit the form, Product Name is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -73,7 +77,7 @@ const FormMain = (props) => {
               {...register("productOwnerName", { required: true })}
             />
             {errors.productOwnerName && (
-              <p className="form-error">Product Owner Name is required.</p>
+              <p className="form-error">To submit the form, Product Owner Name is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -86,7 +90,7 @@ const FormMain = (props) => {
               {...register("scrumMasterName", { required: true })}
             />
             {errors.scrumMasterName && (
-              <p className="form-error">Scrum Master Name is required.</p>
+              <p className="form-error">To submit the form, Scrum Master Name is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -102,7 +106,7 @@ const FormMain = (props) => {
               {...register("startDate", { required: true })}
             />
             {errors.startDate && (
-              <p className="form-error">Start Date is required.</p>
+              <p className="form-error">To submit the form, Start Date is required.</p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -123,7 +127,7 @@ const FormMain = (props) => {
               </MenuItem>
             </TextField>
             {errors.methodology && (
-              <p className="form-error">Methodology is required.</p>
+              <p className="form-error">To submit the form, Methodology is required.</p>
             )}
           </Grid>
         </Grid>

@@ -1,5 +1,6 @@
 import { Grid, Button, Stack } from "@mui/material";
 
+//Component that manages adding developers to Web Apps
 const AddDevelopers = (props) => {
   //Component Props
   const { append, remove, errors, register, fields } = props;
@@ -26,7 +27,7 @@ const AddDevelopers = (props) => {
       </Grid>
       {errors.Developers && (
         <p className="form-error">
-          Please add 1 to 5 developers and ensure that a name is entered in
+          To submit the form, please add 1 to 5 developers and ensure that a name is entered in
           there respective fields.
         </p>
       )}

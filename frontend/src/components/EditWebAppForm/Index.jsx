@@ -13,7 +13,7 @@ const EditWebAppForm = (props) => {
   });
   //React Router hook
   const { productId } = useParams();
-  //Function call to gather specific web app based on product id param
+  //Function call to gather specific web app based on product id parameter
   const webApp = getWebApp(productId);
 
   return (

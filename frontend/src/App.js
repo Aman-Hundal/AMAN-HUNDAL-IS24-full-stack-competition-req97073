@@ -4,7 +4,7 @@ import WebAppsTable from "./components/WebAppsTable/Index";
 import useAppData from "./hooks/useAppData";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import WebAppForm from "./components/CreateWebAppForm/Index";
-import EditWebAppForm from "./components/EditWebApp/Index";
+import EditWebAppForm from "./components/EditWebAppForm/Index";
 
 function App() {
   //Global App Data/Functions

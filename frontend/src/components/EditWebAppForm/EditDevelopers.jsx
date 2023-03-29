@@ -1,13 +1,9 @@
 import { Grid } from "@mui/material";
 
+//Component that manages editing developers for Web Apps
 const EditDevelopers = (props) => {
   //Component Props
-  const {
-    errors,
-    developerList,
-    handleDeveloperChange,
-    errorMessage,
-  } = props;
+  const { errors, developerList, handleDeveloperChange, errorMessage } = props;
 
   return (
     <>
