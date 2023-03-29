@@ -86,7 +86,9 @@ const FormMain = (props) => {
               {...register("productName", { required: true })}
             />
             {errors.productName && (
-              <p className="form-error">To submit the form, Product Name is required.</p>
+              <p className="form-error">
+                To submit the form, Product Name is required.
+              </p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -100,7 +102,9 @@ const FormMain = (props) => {
               {...register("productOwnerName", { required: true })}
             />
             {errors.productOwnerName && (
-              <p className="form-error">To submit the form, Product Owner Name is required.</p>
+              <p className="form-error">
+                To submit the form, Product Owner Name is required.
+              </p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -114,7 +118,9 @@ const FormMain = (props) => {
               {...register("scrumMasterName", { required: true })}
             />
             {errors.scrumMasterName && (
-              <p className="form-error">To submit the form, Scrum Master Name is required.</p>
+              <p className="form-error">
+                To submit the form, Scrum Master Name is required.
+              </p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -131,7 +137,9 @@ const FormMain = (props) => {
               {...register("startDate", { required: true })}
             />
             {errors.startDate && (
-              <p className="form-error">To submit the form, Start Date is required.</p>
+              <p className="form-error">
+                To submit the form, Start Date is required.
+              </p>
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
@@ -155,7 +163,9 @@ const FormMain = (props) => {
               </MenuItem>
             </TextField>
             {errors.methodology && (
-              <p className="form-error">To submit the form, Methodology is required.</p>
+              <p className="form-error">
+                To submit the form, Methodology is required.
+              </p>
             )}
           </Grid>
         </Grid>
@@ -169,7 +179,7 @@ const FormMain = (props) => {
           />
           <Stack
             direction="row"
-            sx={{ marginTop: "30px" }}
+            sx={{ marginTop: "30px", marginBottom: "20px" }}
             justifyContent="center"
             alignItems="center"
           >
