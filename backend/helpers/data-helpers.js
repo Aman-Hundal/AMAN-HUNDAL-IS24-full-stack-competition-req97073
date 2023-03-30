@@ -25,12 +25,14 @@ const addWebApp = async (newWebApp) => {
       flag: "w",
     });
     return {
-      message: "New web application record created",
+      message: "New web application record created.",
       status: 201,
+      webApp: newWebApp,
     };
   } catch (error) {
     return {
-      message: "An error occured while saving your file, please try again.",
+      message:
+        "An error occured while saving your web application record, please try again.",
       status: 500,
     };
   }
@@ -42,7 +44,7 @@ const updateWebApp = async (id, adjustedWebapp) => {
   //Error handling for web app that does not exist
   if (oldWebAppIdx === -1) {
     return {
-      message: `Web application ${id} does not exist. Please provide a valid web app.`,
+      message: `Web application ${id} does not exist. Please provide a valid web application productId.`,
       status: 404,
     };
   }
@@ -54,12 +56,14 @@ const updateWebApp = async (id, adjustedWebapp) => {
       flag: "w",
     });
     return {
-      message: `Web application ${id} updated`,
-      status: 204,
+      message: `Web application ${id} updated.`,
+      status: 200,
+      webApp: adjustedWebapp,
     };
   } catch (error) {
     return {
-      message: "An error occured while saving your file, please try again.",
+      message:
+        "An error occured while updating your web application record, please try again.",
       status: 500,
     };
   }
@@ -71,7 +75,7 @@ const deleteWebApp = async (id) => {
   //Error handling for web app that does not exist
   if (webAppIdx === -1) {
     return {
-      message: `Web application ${id} does not exist. Please provide a valid web app.`,
+      message: `Web application ${id} does not exist. Please provide a valid web application productId.`,
       status: 404,
     };
   }
@@ -83,12 +87,13 @@ const deleteWebApp = async (id) => {
       flag: "w",
     });
     return {
-      message: `Web application ${id} deleted`,
+      message: `Web application ${id} deleted.`,
       status: 204,
     };
   } catch (error) {
     return {
-      message: "An error occured while saving your file, please try again.",
+      message:
+        "An error occured while deleting your web application record, please try again.",
       status: 500,
     };
   }
