@@ -37,7 +37,6 @@ app.use("/api/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 
 //Routes
 app.use("/api/webapps", webappsRoute);
-app.use("/api/webapps", webappsRoute);
 app.get("/api", (req, res) => {
   res.status(200).send("Welcome to IMB Web Apps API");
 });

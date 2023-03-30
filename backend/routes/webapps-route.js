@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAllWebApps,
-  addWebApp,
-  updateWebApp,
-  deleteWebApp,
-} = require("../helpers/data-helpers");
+  getWebApps,
+  createWebApp,
+  editWebApp,
+  deleteWebApp
+} = require("../controllers/webapps-controller");
 
 //Swagger Documentation WebApp Schema
 /**
@@ -72,10 +72,8 @@ const {
  *               items:
  *                 $ref: '#/components/schemas/WebApp'
  */
-router.get("/", (req, res) => {
-  const webApps = getAllWebApps();
-  res.status(200).json(webApps);
-});
+router.get("/", getWebApps);
+
 //POST ROUTE
 /**
  * @swagger
@@ -99,13 +97,8 @@ router.get("/", (req, res) => {
  *       500:
  *         description: An error occured while saving your web application record, please try again
  */
-router.post("/", async (req, res) => {
-  const newWebApp = req.body;
-  const resultObj = await addWebApp(newWebApp);
-  res
-    .status(resultObj.status)
-    .json({ message: resultObj.message, newRecord: resultObj.webApp });
-});
+router.post("/", createWebApp);
+
 //PUT ROUTE
 /**
  * @swagger
@@ -138,14 +131,8 @@ router.post("/", async (req, res) => {
  *      500:
  *        description: An error occured while updating your web application record, please try again
  */
-router.put("/:productId", async (req, res) => {
-  const updatedWebApp = req.body;
-  const { productId } = req.params;
-  const resultObj = await updateWebApp(productId, updatedWebApp);
-  res
-    .status(resultObj.status)
-    .json({ message: resultObj.message, udpatedRecord: resultObj.webApp });
-});
+router.put("/:productId", editWebApp);
+
 //DELETE ROUTE
 /**
  * @swagger
@@ -167,17 +154,13 @@ router.put("/:productId", async (req, res) => {
  *          schema:
  *            $ref: '#/components/schemas/WebApp'
  *    responses:
- *      204:
+ *      200:
  *        description: Web application record deleted
  *      404:
  *        description: Web application does not exist. Please provide a valid web application productId
  *      500:
  *        description: An error occured while deleting your web application record, please try again
  */
-router.delete("/:productId", async (req, res) => {
-  const { productId } = req.params;
-  const resultObj = await deleteWebApp(productId);
-  res.sendStatus(resultObj.status);
-});
+router.delete("/:productId", deleteWebApp);
 
 module.exports = router;

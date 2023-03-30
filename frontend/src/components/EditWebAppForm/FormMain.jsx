@@ -50,7 +50,7 @@ const FormMain = (props) => {
     //Save updated web app data
     const response = await updateWebApp(webApp.productId, data);
     //Conditional statement to check if there was an error submitting the updated web app data
-    if (response.status !== 204) {
+    if (response.status !== 200) {
       return setSubmissionError((prev) => ({
         ...prev,
         error: true,
