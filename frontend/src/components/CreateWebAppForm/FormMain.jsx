@@ -1,6 +1,15 @@
 import "../styles/webappform.css";
-import { Grid, Button, TextField, MenuItem, Stack } from "@mui/material";
-import { useForm, useFieldArray } from "react-hook-form";
+import {
+  Grid,
+  Button,
+  TextField,
+  MenuItem,
+  Stack,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import AddDevelopers from "./AddDevelopers";
 import { useNavigate } from "react-router-dom";
 
@@ -118,27 +127,34 @@ const FormMain = (props) => {
             )}
           </Grid>
           <Grid item xs={12} sx={{ padding: "0 0 1% 0" }}>
-            <TextField
-              variant="outlined"
-              fullWidth
-              select
-              defaultValue=""
-              label="Methodology"
-              name="methodology"
-              {...register("methodology", { required: true })}
-            >
-              <MenuItem key={1} value={"Agile"}>
-                {"Agile"}
-              </MenuItem>
-              <MenuItem key={2} value={"Waterfall"}>
-                {"Waterfall"}
-              </MenuItem>
-            </TextField>
-            {errors.methodology && (
-              <p className="form-error">
-                To submit the form, Methodology is required.
-              </p>
-            )}
+            <FormControl fullWidth>
+              <InputLabel>Methodology</InputLabel>
+              <Controller
+                control={control}
+                name="methodology"
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    defaultValue=""
+                    options={props.languageOptionsToSelect}
+                  >
+                    <MenuItem key={1} value={"Agile"}>
+                      {"Agile"}
+                    </MenuItem>
+                    <MenuItem key={2} value={"Waterfall"}>
+                      {"Waterfall"}
+                    </MenuItem>
+                  </Select>
+                )}
+              />
+              {errors.methodology && (
+                <p className="form-error">
+                  To submit the form, Methodology is required.
+                </p>
+              )}
+            </FormControl>
           </Grid>
         </Grid>
         <Stack direction="column" justifyContent="center" alignItems="center">

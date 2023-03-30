@@ -10,7 +10,6 @@ import {
   Button,
   TableFooter,
 } from "@mui/material";
-import { useState } from "react";
 import DeveloperList from "./DeveloperList";
 import NoWebAppsData from "./NoWebAppsData";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +17,9 @@ import { useNavigate } from "react-router-dom";
 //Main Component (Table/Tracker) for listing all Web Apps created/available
 const WebAppsTable = (props) => {
   //Component Props
-  const { webApps } = props;
+  const { webApps, webAppTablePage, setWebAppTablePage } = props;
   //Constants
   const ROWS_PER_PAGE = 15;
-  //Pagination State Management
-  const [webAppTablePage, setWebAppTablePage] = useState(0);
   //React Router hook
   const navigate = useNavigate();
 

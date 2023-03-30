@@ -18,6 +18,8 @@ const Search = (props) => {
     developers: false,
     scrumMaster: false,
   });
+  //Table Pagination State Management
+  const [webAppTablePage, setWebAppTablePage] = useState(0);
 
   //Function to clean string data
   const cleanString = (str) => {
@@ -50,12 +52,16 @@ const Search = (props) => {
         ...prev,
         scrumMaster: !prev.scrumMaster,
       }));
+      //Reset pagination to beginning for data table
+      setWebAppTablePage(0);
     }
     if (value === "Developer") {
       setSearchSelection((prev) => ({
         ...prev,
         developers: !prev.developers,
       }));
+      //Reset pagination to beginning for data table
+      setWebAppTablePage(0);
     }
   };
 
@@ -103,7 +109,12 @@ const Search = (props) => {
         </Stack>
       </Stack>
       <WebAppCounter webAppData={webAppData} webApps={queryWebApp()} />
-      <WebAppsTable webAppData={webAppData} webApps={queryWebApp()} />
+      <WebAppsTable
+        webAppData={webAppData}
+        webApps={queryWebApp()}
+        webAppTablePage={webAppTablePage}
+        setWebAppTablePage={setWebAppTablePage}
+      />
     </>
   );
 };
