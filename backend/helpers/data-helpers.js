@@ -7,11 +7,40 @@ const { dataValidation } = require("./data-validation-helpers");
 
 //Function to gather and return all web app JSON data
 const searchWebApps = (query) => {
+  //Search query if scrum master selected
+  if (query.scrumMaster) {
+    const cleanQuery = cleanString(query.scrumMaster);
+    const filteredWebApps = webApps.filter(
+      (webApp) => cleanString(webApp.scrumMasterName) === cleanQuery
+    );
+    return {
+      webApps: filteredWebApps,
+      status: 200,
+    };
+  }
+  //Search query if developer selected
+  if (query.Developers) {
+    const cleanQuery = cleanString(query.Developers);
+    const filteredWebApps = webApps.filter((webApp) => {
+      return webApp.Developers.map((developer) =>
+        cleanString(developer)
+      ).includes(cleanQuery);
+    });
+    return {
+      webApps: filteredWebApps,
+      status: 200,
+    };
+  }
+  //If no query selected, return all web apps data
   return { webApps, status: 200 };
 };
 //Function to gather one specific web app index
 const getWebApp = (id) => {
   return webApps.findIndex((webApp) => webApp.productId === id);
+};
+//Function to clean string data
+const cleanString = (str) => {
+  return str.toLowerCase().trim().replace(" ", "");
 };
 //Function to add a new web app to JSON data
 const addWebApp = async (newWebApp) => {

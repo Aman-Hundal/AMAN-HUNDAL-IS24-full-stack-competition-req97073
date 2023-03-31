@@ -1,12 +1,15 @@
-import AddWebAppButton from "./AddWebAppButton/Index";
 import Search from "./Search/Index";
+import TopMenuButtons from "./TopMenuButtons/Index";
 
+//Main Index Page for App
 const MainPage = (props) => {
-  const { webAppData } = props;
+  //Component Props
+  const { webAppData, getQueriedWebApp } = props;
+  
   return (
     <>
-      <AddWebAppButton />
-      <Search webAppData={webAppData} />
+      <TopMenuButtons />
+      <Search webAppData={webAppData} getQueriedWebApp={getQueriedWebApp} />
     </>
   );
 };

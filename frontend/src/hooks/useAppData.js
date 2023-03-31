@@ -58,8 +58,20 @@ const useAppData = () => {
   const getWebApp = (id) => {
     return webAppState.find((webApp) => webApp.productId === id);
   };
+  //Function to find a specific web app from query parameters
+  const getQueriedWebApp = async (query) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/webapps?${query}`
+      );
+      setWebAppState((prev) => (prev = response.data));
+      return response;
+    } catch (error) {
+      return error;
+    }
+  };
 
-  //useEffect to load app data (backend api calls etc.)
+  //useEffect to load app data on page load (backend api calls etc.)
   useEffect(() => {
     const getAllData = async () => {
       await getAllWebApps();
@@ -74,6 +86,7 @@ const useAppData = () => {
     saveWebApp,
     getWebApp,
     updateWebApp,
+    getQueriedWebApp,
   };
 };
 

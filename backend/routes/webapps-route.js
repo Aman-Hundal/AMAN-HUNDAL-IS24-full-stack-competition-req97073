@@ -4,7 +4,7 @@ const {
   getWebApps,
   createWebApp,
   editWebApp,
-  deleteWebApp
+  deleteWebApp,
 } = require("../controllers/webapps-controller");
 
 //Swagger Documentation WebApp Schema
@@ -41,6 +41,7 @@ const {
  *           description: The name of the scrum master associated with the web app
  *         startDate:
  *           type: date
+ *           pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
  *           description: The start date associated with the web app (EX. YYYY/MM/DD)
  *         methodology:
  *           type: string

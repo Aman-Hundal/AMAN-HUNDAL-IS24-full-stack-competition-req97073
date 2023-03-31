@@ -6,8 +6,14 @@ import MainPage from "./components/MainPage/Index";
 
 function App() {
   //Global App Data/Functions
-  const { webAppState, loading, saveWebApp, getWebApp, updateWebApp } =
-    useAppData();
+  const {
+    webAppState,
+    loading,
+    saveWebApp,
+    getWebApp,
+    updateWebApp,
+    getQueriedWebApp,
+  } = useAppData();
 
   return (
     <>
@@ -19,7 +25,10 @@ function App() {
               path="/webapps"
               element={
                 <>
-                  <MainPage webAppData={webAppState} />
+                  <MainPage
+                    webAppData={webAppState}
+                    getQueriedWebApp={getQueriedWebApp}
+                  />
                 </>
               }
             />
@@ -37,7 +46,6 @@ function App() {
               }
             />
             <Route path="/" element={<Navigate to="/webapps" replace />} />
-            {/* <Route path="*" element={<Navigate to="/notfound" replace />} /> */}
           </Routes>
         </BrowserRouter>
       ) : null}

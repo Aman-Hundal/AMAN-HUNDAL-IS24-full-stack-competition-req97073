@@ -39,12 +39,6 @@ const dataValidation = (webApp) => {
       messsage: "Scrum Master Name is required",
     };
   }
-  if (!webApp.startDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
-    return {
-      error: true,
-      messsage: "Start date must follow pattern of YYYY/MM/DD",
-    };
-  }
   return { error: false };
 };
 

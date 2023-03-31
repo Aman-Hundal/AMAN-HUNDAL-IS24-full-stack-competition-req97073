@@ -58,6 +58,11 @@ const FormMain = (props) => {
     }));
     navigate("/webapps");
   };
+  //Handle Back Button Click
+  const handleClick = () => {
+    navigate("/webapps");
+    window.location.reload();
+  };
 
   return (
     <>
@@ -181,7 +186,7 @@ const FormMain = (props) => {
               Save
             </Button>
             <Button
-              onClick={() => navigate("/webapps")}
+              onClick={() => handleClick()}
               size="medium"
               variant="outlined"
               sx={{ minWidth: 150 }}

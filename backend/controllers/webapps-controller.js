@@ -7,8 +7,8 @@ const {
 
 //GET Controller Function that manages HTTP requests and responses
 const getWebApps = async (req, res) => {
-  const queryParams = req.query;
-  const { status, webApps } = searchWebApps(queryParams);
+  const query = req.query;
+  const { status, webApps, message } = searchWebApps(query);
   res.status(status).json(webApps);
 };
 //POST Controller Function that manages HTTP requests and responses
