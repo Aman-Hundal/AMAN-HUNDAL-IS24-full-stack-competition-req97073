@@ -14,7 +14,7 @@ import DeveloperList from "./DeveloperList";
 import NoWebAppsData from "./NoWebAppsData";
 import { useNavigate } from "react-router-dom";
 
-//Main Component (Table/Tracker) for listing all Web Apps created/available
+//Component (Table/Tracker) for listing all Web Apps created/available/queried
 const WebAppsTable = (props) => {
   //Component Props
   const { webApps, webAppTablePage, setWebAppTablePage } = props;

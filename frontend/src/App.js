@@ -1,6 +1,6 @@
 import useAppData from "./hooks/useAppData";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import WebAppForm from "./components/CreateWebAppForm/Index";
+import CreateWebAppForm from "./components/CreateWebAppForm/Index";
 import EditWebAppForm from "./components/EditWebAppForm/Index";
 import MainPage from "./components/MainPage/Index";
 
@@ -13,6 +13,7 @@ function App() {
     getWebApp,
     updateWebApp,
     getQueriedWebApp,
+    deleteWebApp,
   } = useAppData();
 
   return (
@@ -28,13 +29,14 @@ function App() {
                   <MainPage
                     webAppData={webAppState}
                     getQueriedWebApp={getQueriedWebApp}
+                    deleteWebApp={deleteWebApp}
                   />
                 </>
               }
             />
             <Route
               path="/webapps/new"
-              element={<WebAppForm saveWebApp={saveWebApp} />}
+              element={<CreateWebAppForm saveWebApp={saveWebApp} />}
             />
             <Route
               path="/webapps/:productId/edit"

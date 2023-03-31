@@ -6,7 +6,7 @@ const TopMenuButtons = (props) => {
   //React Router hook
   const navigate = useNavigate();
 
-  //Handle Home Button Click
+  //Function to Handle Home Button Click
   const handleClick = () => {
     navigate("/webapps");
     window.location.reload();

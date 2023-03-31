@@ -72,6 +72,18 @@ const useAppData = () => {
       return error;
     }
   };
+  //Function to delete a specific web app
+  const deleteWebApp = async (id) => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/webapps/${id}`
+      );
+      await getAllWebApps();
+      return response;
+    } catch (error) {
+      return error.response;
+    }
+  };
 
   //useEffect to load app data on page load (backend api calls etc.)
   useEffect(() => {
@@ -89,6 +101,7 @@ const useAppData = () => {
     getWebApp,
     updateWebApp,
     getQueriedWebApp,
+    deleteWebApp,
   };
 };
 

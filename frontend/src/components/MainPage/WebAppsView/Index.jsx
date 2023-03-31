@@ -11,8 +11,8 @@ import WebAppCounter from "../WebAppCounter/Index";
 import WebAppsTable from "../WebAppsTable/Index";
 import { useSearchParams } from "react-router-dom";
 
-//Component that handles users search queries
-const Search = (props) => {
+//Component that handles users search queries and shows the user all the webapps
+const WebAppsView = (props) => {
   //Component Props
   const { webAppData, getQueriedWebApp } = props;
   //State to manage Search functionality for user
@@ -21,9 +21,15 @@ const Search = (props) => {
     developers: false,
     scrumMaster: false,
   });
+  //Local state to manage submission error handling
+  const [submissionError, setSubmissionError] = useState({
+    error: false,
+    message: "",
+  });
   //Table Pagination State Management
   const [webAppTablePage, setWebAppTablePage] = useState(0);
   //React Router hooks
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
 
   //Function to handle selection on query check boxes
@@ -33,16 +39,12 @@ const Search = (props) => {
         ...prev,
         scrumMaster: !prev.scrumMaster,
       }));
-      //Reset pagination to beginning for data table
-      setWebAppTablePage(0);
     }
     if (value === "Developer") {
       setSearchSelection((prev) => ({
         ...prev,
         developers: !prev.developers,
       }));
-      //Reset pagination to beginning for data table
-      setWebAppTablePage(0);
     }
   };
   //Function to handle users input for search criteria
@@ -63,8 +65,20 @@ const Search = (props) => {
     const response = await getQueriedWebApp(cleanQuery);
     //Conditional statement to check if there was an error submitting the web app data
     if (response.status !== 200) {
-      console.log(response);
+      return setSubmissionError((prev) => ({
+        ...prev,
+        error: true,
+        message: response.data.message,
+      }));
     }
+    //Reset pagination to beginning for data table
+    setWebAppTablePage(0);
+    //Clear submission error data if no error
+    setSubmissionError((prev) => ({
+      ...prev,
+      error: false,
+      message: "",
+    }));
   };
 
   return (
@@ -119,6 +133,11 @@ const Search = (props) => {
             />
           </FormGroup>
         </Stack>
+        {submissionError.error ? (
+          <p style={{ margin: 0, color: "red" }}>{submissionError.message}</p>
+        ) : (
+          ""
+        )}
       </Stack>
       <WebAppCounter webAppData={webAppData} webApps={webAppData} />
       <WebAppsTable
@@ -130,4 +149,4 @@ const Search = (props) => {
   );
 };
 
-export default Search;
+export default WebAppsView;

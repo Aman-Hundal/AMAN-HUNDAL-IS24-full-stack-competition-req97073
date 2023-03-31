@@ -19,7 +19,7 @@ const createWebApp = async (req, res) => {
   if (status !== 201) {
     return res.status(status).json({ message });
   }
-  res.status(status).json({ message, newRecord: webApp });
+  res.status(status).json({ message, productId: webApp.productId });
 };
 //PUT Controller Function that manages HTTP requests and responses
 const editWebApp = async (req, res) => {
