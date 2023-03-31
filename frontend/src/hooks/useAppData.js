@@ -6,6 +6,7 @@ const useAppData = () => {
   //Global App State
   const [webAppState, setWebAppState] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [serverError, setServerError] = useState(false);
 
   //Function to gather backend api web app data and configure state for web app data
   const getAllWebApps = async () => {
@@ -84,11 +85,28 @@ const useAppData = () => {
       return error.response;
     }
   };
+  //Function to check server health
+  const getServerHealth = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/health`
+      );
+      return response;
+    } catch (error) {
+      return error;
+    }
+  };
 
   //useEffect to load app data on page load (backend api calls etc.)
   useEffect(() => {
     const getAllData = async () => {
-      await getAllWebApps();
+      //Check server health, if server is unealthy (not online etc) set server error to true else return all data
+      const health = await getServerHealth();
+      if (health.status !== 200) {
+        setServerError(true);
+      } else {
+        await getAllWebApps();
+      }
       setLoading(false);
     };
     getAllData();
@@ -99,6 +117,7 @@ const useAppData = () => {
     webAppState,
     saveWebApp,
     getWebApp,
+    serverError,
     updateWebApp,
     getQueriedWebApp,
     deleteWebApp,
