@@ -12,9 +12,9 @@ My submssion for the IS24-full-stack-competition-req97073 competition. This appl
 
 ### Front-End Setup
 
-- Go into /frontend folder
-- To install front-end dependancies `npm i`
-- Create a copy of ".env copy" then paste and rename to .env in /frontend root
+- Go to /frontend folder
+- `npm i` to install front-end dependancies 
+- Create a copy of ".env copy" then paste and rename to ".env" in /frontend root
 - Go to the .env file and adjust the following:
   - PORT (3001 recommended)
   - REACT_APP_API_URL (EX. http://localhost:3000/api)
@@ -22,9 +22,9 @@ My submssion for the IS24-full-stack-competition-req97073 competition. This appl
 
 ### Back-End Setup
 
-- Go into /backend folder
-- To install back-end dependancies ### `npm i`
-- Create a copy of ".env copy" then paste and rename to .env in /backend root
+- Go to /backend folder
+- `npm i` to install back-end dependancies
+- Create a copy of ".env copy" then paste and rename to ".env" in /backend root
 - Go to the .env file and adjust the following:
   - PORT (3000 recommended)
 - `npm run start` to start Node server
