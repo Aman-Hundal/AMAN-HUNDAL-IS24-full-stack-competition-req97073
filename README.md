@@ -5,29 +5,29 @@ My submssion for the IS24-full-stack-competition-req97073 competition. This appl
 ### Stack
 
 - Front-End = React.js (React Router), Material UI
-- Back-End = Node.js (Express.js)
+- Back-End = Node.js (v16.15.0), Express.js
 - Languages = JavaScript, HTML, CSS
 
 ## Lets get started
 
 ### Front-End Setup
 
-- Go to /frontend folder
-- `npm i` to install front-end dependancies 
-- Create a copy of ".env copy" then paste and rename to ".env" in /frontend root
-- Go to the .env file and adjust the following:
+1. Go to /frontend folder
+2. `npm i` to install front-end dependancies 
+3. Create a copy of ".env copy" then paste and rename to ".env" in /frontend root
+4. Go to the .env file and adjust the following:
   - PORT (3001 recommended)
   - REACT_APP_API_URL (EX. http://localhost:3000/api)
-- `npm run start` to start React client
+5. `npm run start` to start React client
 
 ### Back-End Setup
 
-- Go to /backend folder
-- `npm i` to install back-end dependancies
-- Create a copy of ".env copy" then paste and rename to ".env" in /backend root
-- Go to the .env file and adjust the following:
+1. Go to /backend folder
+2. `npm i` to install back-end dependancies
+3. Create a copy of ".env copy" then paste and rename to ".env" in /backend root
+4. Go to the .env file and adjust the following:
   - PORT (3000 recommended)
-- `npm run start` to start Node server
+5. `npm run start` to start Node server
 
 ### Swagger Documentation
 
