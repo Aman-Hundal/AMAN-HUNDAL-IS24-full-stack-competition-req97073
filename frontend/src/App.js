@@ -25,13 +25,11 @@ function App() {
             <Route
               path="/webapps"
               element={
-                <>
-                  <MainPage
-                    webAppData={webAppState}
-                    getQueriedWebApp={getQueriedWebApp}
-                    deleteWebApp={deleteWebApp}
-                  />
-                </>
+                <MainPage
+                  webAppData={webAppState}
+                  getQueriedWebApp={getQueriedWebApp}
+                  deleteWebApp={deleteWebApp}
+                />
               }
             />
             <Route
