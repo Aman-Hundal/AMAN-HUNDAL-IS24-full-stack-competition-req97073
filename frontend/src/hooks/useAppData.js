@@ -10,7 +10,9 @@ const useAppData = () => {
   //Function to gather backend api web app data and configure state for web app data
   const getAllWebApps = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/webapps");
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/webapps`
+      );
       setWebAppState((prev) => (prev = response.data));
     } catch (error) {
       return error;
@@ -26,7 +28,7 @@ const useAppData = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/webapps",
+        `${process.env.REACT_APP_API_URL}/webapps`,
         newWebAppData
       );
       await getAllWebApps();
@@ -45,7 +47,7 @@ const useAppData = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/webapps/${id}`,
+        `${process.env.REACT_APP_API_URL}/webapps/${id}`,
         adjustedWebApp
       );
       await getAllWebApps();
@@ -62,7 +64,7 @@ const useAppData = () => {
   const getQueriedWebApp = async (query) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/webapps?${query}`
+        `${process.env.REACT_APP_API_URL}/webapps?${query}`
       );
       setWebAppState((prev) => (prev = response.data));
       return response;

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const webappsRoute = require("./routes/webapps-route");
 const morgan = require("morgan");
@@ -18,7 +19,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000/api",
+        url: `http://localhost:${PORT}/api`,
       },
     ],
   },
@@ -43,5 +44,5 @@ app.get("/api", (req, res) => {
 
 //Start up server
 app.listen(PORT, () => {
-  console.log(`IMB WebApps API started.`);
+  console.log(`IMB WebApps API started on PORT ${PORT}`);
 });
