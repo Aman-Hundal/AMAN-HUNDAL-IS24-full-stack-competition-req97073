@@ -1,6 +1,6 @@
 import "../styles/webappform.css";
 import { Grid, Button, TextField, MenuItem, Stack } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import EditDevelopers from "./EditDevelopers";
@@ -31,7 +31,7 @@ const FormMain = (props) => {
     setDeveloperFormData((prev) => ({ ...prev, developers }));
   };
   //Function to handle errors on form input for developer data
-  const handleErrorsDeveloperData = () => {
+  const handleErrorsDeveloperData =  useCallback(() => {
     //Conditional to check and see if all elements in the developer data form array are blank (""), if so there is an error
     if (developerFormData.developers.every((developer) => developer === "")) {
       const message =
@@ -42,7 +42,7 @@ const FormMain = (props) => {
     const message = "";
     const error = false;
     setDeveloperFormData((prev) => ({ ...prev, message, error }));
-  };
+  }, [developerFormData.developers])
   //Function to submit and save updated web app data
   const submitUpdatedAppData = async (data) => {
     //Add developers form data to data that will be sent to backend api
@@ -74,7 +74,7 @@ const FormMain = (props) => {
   //useEffect call to handle errors on changes to developer form data
   useEffect(() => {
     handleErrorsDeveloperData();
-  }, [developerFormData.developers]);
+  }, [developerFormData.developers, handleErrorsDeveloperData]);
 
   return (
     <>
