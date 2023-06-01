@@ -2,7 +2,7 @@
 
 My submssion for the IS24-full-stack-competition-req97073 competition. Application was created in a 1 week deadline and the assignment can be found here https://github.com/bcgov/citz-imb-full-stack-code-challenge-req97073
 
-This application is designed help manage and track Web Applications developed by the BC Government Ministry of Citizens' Services Information Management Branch (IMB).
+This application is designed to help manage and track Web Applications developed by the BC Government Ministry of Citizens' Services Information Management Branch (IMB).
 
 Application was successfully accepted.
 
